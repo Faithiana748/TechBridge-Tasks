@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Roadmap | TechBridge</title>
+    <meta name="description" content="Choose the Data Analytics or Web Development track and see all 8 tasks of the TechBridge 30-day practical internship, from Day 1 to Day 26.">
+    <link rel="icon" href="techbridge-logo.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="index.html" aria-label="TechBridge home">
+                <img src="techbridge-logo.svg" alt="TechBridge logo" width="220" height="45">
+            </a>
+            <span id="menu-open" class="menu-anchor"></span>
+            <a class="nav-toggle nav-open" href="#menu-open" aria-label="Open menu"><span class="bars"></span></a>
+            <a class="nav-toggle nav-close" href="#menu-closed" aria-label="Close menu"><span class="bars"></span></a>
+            <nav class="site-nav" aria-label="Main">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="tasks.html">Internship Tasks</a></li>
+                    <li><a href="roadmap.html" aria-current="page">Internship Roadmap</a></li>
+                    <li><a href="index.html#apply">How to apply</a></li>
+                    <li><a href="index.html#community">Community</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a class="btn btn-small" href="https://forms.gle/8EbdSy5ttGfLZfjv5" target="_blank" rel="noopener">Apply now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <!-- INTRODUCTION -->
+        <section class="hero page-hero" id="top">
+            <div class="wrap">
+                <p class="hero-org">30-Day Practical Internship</p>
+                <h1>Your internship, track by track</h1>
+                <p class="hero-lead">TechBridge offers a 30-day practical internship in two tracks. Pick one to see exactly what you will be doing, task by task, from Day 1 to Day 26.</p>
+                <div class="actions">
+                    <a class="btn" href="#tracks">Choose your track</a>
+                    <a class="btn btn-ghost" href="https://forms.gle/8EbdSy5ttGfLZfjv5" target="_blank" rel="noopener">Apply for TechBridge Internship</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRACK SELECTION -->
+        <section class="section section-tint" id="tracks">
+            <div class="wrap">
+                <h2>Choose your track</h2>
+                <p class="section-lead">Select a track below. The roadmap changes instantly, with no page refresh.</p>
+
+                <div class="track-picker" role="group" aria-label="Internship track">
+                    <button type="button" class="track-btn" data-track="data-analytics" aria-pressed="false">
+                        <svg class="track-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="6" y="26" width="9" height="16" rx="1.5"/><rect x="19.5" y="14" width="9" height="28" rx="1.5"/><rect x="33" y="6" width="9" height="36" rx="1.5"/></svg>
+                        <span class="track-name">Data Analytics</span>
+                        <span class="track-desc">Spreadsheets, SQL and dashboards.</span>
+                        <span class="track-state">View this track</span>
+                    </button>
+                    <button type="button" class="track-btn" data-track="web-development" aria-pressed="false">
+                        <svg class="track-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M17 14 7 24l10 10M31 14l10 10-10 10M27 9l-6 30" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span class="track-name">Web Development</span>
+                        <span class="track-desc">HTML, CSS and JavaScript.</span>
+                        <span class="track-state">View this track</span>
+                    </button>
+                </div>
+
+                <noscript>
+                    <p class="noscript-note">The interactive roadmap needs JavaScript. You can still read the Web Development tasks on the <a href="tasks.html">Internship Tasks page</a>.</p>
+                </noscript>
+
+                <div class="viewing" id="viewing" aria-live="polite" data-track="web-development">
+                    <p class="viewing-label">Currently Viewing</p>
+                    <p class="viewing-track" id="viewing-track">Web Development</p>
+                    <p class="viewing-summary" id="viewing-summary"></p>
+                </div>
+
+                <h3 class="daybar-title">30-Day Practical Internship</h3>
+                <p class="section-lead">Each circle is a task, placed on the day it begins. Select one to jump to its details.</p>
+                <div class="daybar">
+                    <ol class="daybar-points" id="daybar-points"></ol>
+                </div>
+
+                <ul class="legend" aria-label="Difficulty levels">
+                    <li><span class="meter lvl-1" role="img" aria-label="Level 1 of 3"><i></i><i></i><i></i></span><strong>Beginner</strong><span>Where every intern starts</span></li>
+                    <li><span class="meter lvl-2" role="img" aria-label="Level 2 of 3"><i></i><i></i><i></i></span><strong>Beginner → Intermediate</strong><span>Building on the basics</span></li>
+                    <li><span class="meter lvl-3" role="img" aria-label="Level 3 of 3"><i></i><i></i><i></i></span><strong>Intermediate</strong><span>Bigger, more independent work</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- THE 8 TASKS (filled in by roadmap.js) -->
+        <section class="section" id="journey">
+            <div class="wrap">
+                <h2>Your 8 tasks, in order</h2>
+                <p class="section-lead">The tasks get harder as the days go by. Day 1 is the easiest, Day 26 asks the most of you.</p>
+                <ol class="journey" id="journey-list"></ol>
+            </div>
+        </section>
+
+        <!-- CALL TO ACTION -->
+        <section class="section section-ink" id="apply">
+            <div class="wrap cta">
+                <h2>Found your track?</h2>
+                <p class="section-lead">Apply for the TechBridge internship and begin your 30-day journey.</p>
+                <div class="actions">
+                    <a class="btn" href="https://forms.gle/8EbdSy5ttGfLZfjv5" target="_blank" rel="noopener">Apply for TechBridge Internship</a>
+                    <a class="btn btn-ghost" href="programs.html">See the programs</a>
+                    <a class="btn btn-ghost" href="index.html">Back to homepage</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <div class="footer-brand">
+                <a class="brand" href="index.html" aria-label="TechBridge home">
+                    <img src="techbridge-logo.svg" alt="TechBridge logo" width="220" height="45">
+                </a>
+                <p>Bridging Learning to Real-World Experience</p>
+                <p class="small">TechBridge by Baselink Services Limited</p>
+            </div>
+            <nav aria-label="Footer">
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="tasks.html">Internship Tasks</a></li>
+                    <li><a href="roadmap.html">Internship Roadmap</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <ul class="footer-links">
+                <li><a href="https://www.linkedin.com/company/techbridge-services/" target="_blank" rel="noopener">LinkedIn</a></li>
+                <li><a href="https://www.facebook.com/p/Baselink-Services-100066771475783/" target="_blank" rel="noopener">Facebook</a></li>
+                <li><a href="mailto:techbridgebaslink@gmail.com">techbridgebaslink@gmail.com</a></li>
+            </ul>
+        </div>
+        <div class="wrap copyright">
+            <p>@2026 TechBridge by Baselink Services Limited. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="roadmap.js"></script>
+</body>
+</html>
