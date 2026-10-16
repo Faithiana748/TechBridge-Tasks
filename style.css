@@ -685,6 +685,119 @@ p { margin: 0 0 1em;}
 .roadmap-anim, .journey .task { animation: rise .45s ease both; animation-delay: calc(var(--i, 0) * 60ms);}
 @keyframes rise { from { opacity: 0; transform: translateY(14px);} to { opacity: 1; transform: none;}}
 
+/* CHALLENGE HUB */
+[hidden] { display: none !important;}
+.filter-panel {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding: 1.5rem 1.75rem;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 4px;
+}
+.filter-label { margin: 0 0 .5rem; font-family: var(--font-head); font-weight: 700; font-size: .95rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft);}
+.chips { display: flex; flex-wrap: wrap; gap: .6rem;}
+.chip {
+    min-height: 44px;
+    padding: .5rem 1.15rem;
+    font: inherit;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .2s, color .2s, transform .2s;
+}
+.chip:hover { background: var(--mist);}
+.chip[aria-pressed="true"] { background: var(--ink); color: #fff;}
+.chip[aria-pressed="true"]::before { content: "\2713\00a0";}
+.chip-data { border-color: var(--signal);}
+.chip-web { border-color: var(--blue);}
+.chip[aria-pressed="true"].chip-data { border-color: var(--ink); box-shadow: 0 0 0 3px var(--signal);}
+.chip[aria-pressed="true"].chip-web { border-color: var(--ink); box-shadow: 0 0 0 3px var(--blue);}
+.filter-row { display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;}
+.field { display: grid; gap: .4rem; min-width: 0;}
+.field label { font-family: var(--font-head); font-weight: 700; font-size: .95rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft);}
+.field input, .field select {
+    width: 100%;
+    min-height: 48px;
+    padding: .6rem .9rem;
+    font: inherit;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+}
+.filter-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; padding-top: 1rem; border-top: 1px solid var(--line);}
+.result-count { margin: 0; font-family: var(--font-head); font-weight: 700; color: var(--ink);}
+.difficulty-key { list-style: none; margin: 1.25rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .6rem 2rem; color: var(--ink-soft); font-size: 1rem;}
+.difficulty-key li { display: flex; flex-wrap: wrap; align-items: center; gap: .15rem .6rem;}
+.difficulty-key strong { color: var(--ink); font-family: var(--font-head);}
+.challenge-grid { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem;}
+.challenge { display: flex; animation: rise .45s ease both; animation-delay: calc(var(--i, 0) * 50ms);}
+.challenge-card {
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
+    width: 100%;
+    padding: 1.5rem 1.75rem;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-top-width: 10px;
+    border-radius: 4px;
+}
+.challenge.track-data .challenge-card { border-top-color: var(--signal);}
+.challenge.track-web .challenge-card { border-top-color: var(--blue);}
+.challenge-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem;}
+.track-tag { padding: .15rem .75rem; border-radius: 999px; font-family: var(--font-head); font-weight: 700; font-size: .9rem; color: var(--ink);}
+.track-tag.track-data { background: #d9f5cc;}
+.track-tag.track-web { background: #dcd9fa;}
+.difficulty { display: inline-flex; align-items: center; gap: .5rem; font-weight: 600; font-size: 1rem; color: var(--ink-soft);}
+.challenge-card .meter i, .difficulty-key .meter i, .difficulty .meter i { background: var(--line);}
+.meter.lvl-1 i:nth-child(-n+1), .meter.lvl-2 i:nth-child(-n+2), .meter.lvl-3 i:nth-child(-n+3) { background: var(--ink);}
+.challenge-card h3 { font-size: 1.5rem;}
+.challenge-desc { margin: 0; color: var(--ink-soft);}
+.outcome { padding: .9rem 1rem; background: var(--mist); border-radius: 4px;}
+.outcome-label { display: block; margin-bottom: .2rem; font-family: var(--font-head); font-weight: 700; font-size: .9rem; color: var(--ink);}
+.outcome p { margin: 0; color: var(--ink-soft);}
+.view-btn { align-self: flex-start; margin-top: auto; min-height: 44px; cursor: pointer; font-size: 1rem;}
+.no-results { margin-top: 2rem; padding: 2rem; text-align: center; background: #fff; border: 2px dashed var(--ink); border-radius: 4px;}
+.no-results p { margin: .6rem 0 1.25rem; color: var(--ink-soft);}
+
+/* CHALLENGE HUB: DETAILS WINDOW */
+body.modal-open { overflow: hidden;}
+#challenge-dialog {
+    width: min(720px, 100% - 2rem);
+    max-height: calc(100% - 2rem);
+    padding: 0;
+    color: var(--ink);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-top-width: 10px;
+    border-radius: 4px;
+    overflow: auto;
+}
+#challenge-dialog[data-track="track-data"] { border-top-color: var(--signal);}
+#challenge-dialog[data-track="track-web"] { border-top-color: var(--blue);}
+#challenge-dialog::backdrop { background: rgba(12, 0, 76, .65);}
+#dialog-content { display: grid; gap: 1.1rem; padding: 1.75rem 2rem 2rem;}
+#dialog-content h2 { font-size: clamp(1.6rem, 4vw, 2.2rem);}
+.dialog-lead { margin: 0; font-size: 1.15rem; color: var(--ink-soft);}
+.facts { display: flex; flex-wrap: wrap; gap: .75rem 2rem; margin: 0; padding: .9rem 0; border-block: 1px solid var(--line);}
+.fact dt { font-family: var(--font-head); font-weight: 700; font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft);}
+.fact dd { margin: 0; font-weight: 600;}
+.detail-block h3 { margin-bottom: .4rem; font-size: 1.1rem;}
+.detail-block p { margin: 0; color: var(--ink-soft);}
+.chips-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem;}
+.chips-list li { padding: .25rem .8rem; background: var(--mist); border: 1px solid var(--line); border-radius: 999px; font-size: 1rem;}
+.bullet-list { margin: 0; padding-left: 1.25rem; color: var(--ink-soft);}
+.bullet-list li + li { margin-top: .3rem;}
+#dialog-content .actions { margin-top: .5rem;}
+
 /* NAVIGATION: HAMBURGER BELOW 1280px (the full menu needs about 1200px) */
 @media (max-width: 1280px) {
     .nav-open { display: inline-flex;}
@@ -735,6 +848,14 @@ p { margin: 0 0 1em;}
     .daybar-ends { display: flex; justify-content: space-between; margin: .5rem -.4rem 0; font-family: var(--font-head); font-weight: 700; font-size: .9rem;}
     .legend { grid-template-columns: 1fr;}
     .track-picker { grid-template-columns: 1fr;}
+    .challenge-grid { grid-template-columns: 1fr;}
+    .filter-panel { padding: 1.1rem;}
+    .filter-row { grid-template-columns: 1fr;}
+    .chips { gap: .5rem;}
+    .chip { padding: .5rem .95rem;}
+    .challenge-card { padding: 1.1rem 1.1rem 1.25rem;}
+    #dialog-content { padding: 1.25rem 1.1rem 1.5rem;}
+    #dialog-content .actions .btn { flex: 1 1 100%;}
     .track-btn { padding: 1.1rem 1.1rem;}
     .viewing { padding: 1rem 1.1rem; border-left-width: 8px;}
     .task { grid-template-columns: 4.25rem 1fr;}
@@ -755,6 +876,6 @@ p { margin: 0 0 1em;}
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto;}
     .bridge svg { animation: none;}
-    .journey .task { animation: none;}
+    .journey .task, .challenge { animation: none;}
     .track-btn { transition: none;}
 }
