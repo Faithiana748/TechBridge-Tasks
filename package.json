@@ -1,0 +1,14 @@
+{
+  "name": "techbridge-task-management",
+  "version": "1.0.0",
+  "description": "TechBridge Task Management API built with Node.js and Express",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["techbridge", "express", "api"],
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
