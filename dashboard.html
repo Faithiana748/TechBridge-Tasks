@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intern Dashboard | TechBridge</title>
-    <meta name="description" content="The TechBridge intern dashboard: track your internship progress, mark tasks as completed, explore the Challenge Hub and learn about modern web technologies.">
+    <meta name="description" content="The TechBridge intern dashboard, now powered by a Node.js and Express API: load tasks, view a task, mark it as completed and track progress.">
     <link rel="icon" href="techbridge-logo.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,7 +49,12 @@
                 <p class="hero-lead" id="welcome-text">Good to see you again. Here is where your internship stands today.</p>
                 <div class="hero-status">
                     <span class="hero-status-label">Internship Status</span>
-                    <span class="status-pill is-in-progress" id="status-pill">In Progress</span>
+                    <span class="status-pill is-loading" id="status-pill">Loading...</span>
+                </div>
+                <div class="hero-status">
+                    <span class="hero-status-label">Backend Status</span>
+                    <span class="backend-pill is-checking" id="backend-status" role="status">Checking...</span>
+                    <button type="button" class="link-btn" id="backend-recheck" hidden>Check again</button>
                 </div>
                 <div class="actions">
                     <button type="button" class="btn" id="hero-continue" hidden>Continue Task</button>
@@ -59,6 +64,14 @@
                 <noscript>
                     <p class="noscript-note">The dashboard needs JavaScript to show your tasks and progress. Please turn it on.</p>
                 </noscript>
+            </div>
+        </section>
+
+        <!-- DEMO MODE NOTICE (shown only when the API is simulated in the browser) -->
+        <section class="notice" id="demo-banner" hidden>
+            <div class="wrap notice-inner">
+                <p id="demo-banner-text"></p>
+                <button type="button" class="btn btn-small btn-ghost-dark" id="use-real-backend" hidden>Switch to the real backend</button>
             </div>
         </section>
 
@@ -101,15 +114,30 @@
 
                 <div class="tracker-bar">
                     <div class="chips" role="group" aria-label="Filter tasks by status">
-                        <button type="button" class="chip" data-filter="status" data-value="All" aria-pressed="true">All <span class="count">8</span></button>
-                        <button type="button" class="chip" data-filter="status" data-value="Completed" aria-pressed="false">Completed <span class="count">0</span></button>
-                        <button type="button" class="chip" data-filter="status" data-value="In Progress" aria-pressed="false">In Progress <span class="count">0</span></button>
-                        <button type="button" class="chip" data-filter="status" data-value="Not Started" aria-pressed="false">Not Started <span class="count">0</span></button>
+                        <button type="button" class="chip" data-filter="status" data-value="all" aria-pressed="true">All <span class="count">8</span></button>
+                        <button type="button" class="chip" data-filter="status" data-value="completed" aria-pressed="false">Completed <span class="count">0</span></button>
+                        <button type="button" class="chip" data-filter="status" data-value="in-progress" aria-pressed="false">In Progress <span class="count">0</span></button>
+                        <button type="button" class="chip" data-filter="status" data-value="not-started" aria-pressed="false">Not Started <span class="count">0</span></button>
                     </div>
                     <button type="button" class="btn btn-ghost-dark btn-small" id="reset-progress">Reset progress</button>
                 </div>
 
-                <ul class="task-grid" id="task-grid"></ul>
+                <div class="state-box" id="task-loading" role="status">
+                    <span class="spinner" aria-hidden="true"></span>
+                    <p>Loading tasks...</p>
+                </div>
+
+                <div class="state-box is-error" id="task-error" role="alert" hidden>
+                    <h3>Unable to load tasks.</h3>
+                    <p>Please check your connection or try again.</p>
+                    <p class="state-hint" id="task-error-hint"></p>
+                    <div class="actions">
+                        <button type="button" class="btn btn-blue" id="retry-load">Try again</button>
+                        <button type="button" class="btn btn-ghost-dark" id="use-demo">Use demo mode</button>
+                    </div>
+                </div>
+
+                <ul class="task-grid" id="task-grid" hidden></ul>
 
                 <div class="no-results" id="task-empty" hidden>
                     <h3>No tasks here</h3>
@@ -153,6 +181,89 @@
             </div>
         </section>
 
+        <!-- API DOCUMENTATION -->
+        <section class="section" id="api">
+            <div class="wrap">
+                <h2>How the dashboard talks to the backend</h2>
+                <p class="section-lead">The tasks on this page are not written in the HTML or in the JavaScript. The dashboard asks a Node.js and Express server for them with <code>fetch()</code>, and the server answers with JSON.</p>
+
+                <ol class="flow api-flow" aria-label="How a request travels">
+                    <li class="flow-step">Intern Dashboard</li>
+                    <li class="flow-arrow">fetch() sends a request</li>
+                    <li class="flow-step">REST API (Express)</li>
+                    <li class="flow-arrow">reads and updates</li>
+                    <li class="flow-step">Task data (tasks.json)</li>
+                    <li class="flow-arrow">JSON response goes back to the dashboard</li>
+                </ol>
+
+                <h3 class="explorer-title">API endpoints</h3>
+                <div class="table-scroll">
+                    <table class="api-table">
+                        <thead>
+                            <tr><th scope="col">Method</th><th scope="col">Endpoint</th><th scope="col">What it does</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="method method-get">GET</span></td>
+                                <td><code>/api/tasks</code></td>
+                                <td>Returns all 8 tasks as a JSON array. The dashboard uses it to build the task cards and the progress numbers.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method method-get">GET</span></td>
+                                <td><code>/api/tasks/:id</code></td>
+                                <td>Returns one task, for example <code>/api/tasks/3</code>. The View Task window uses it. An unknown id returns a 404 error.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method method-put">PUT</span></td>
+                                <td><code>/api/tasks/:id</code></td>
+                                <td>Updates a task's status. The body is <code>{ "status": "completed" }</code>. The Mark as Completed button uses it.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method method-get">GET</span></td>
+                                <td><code>/api/health</code></td>
+                                <td>Extra. Replies <code>{ "status": "ok" }</code> so the dashboard can show the Backend Status.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method method-post">POST</span></td>
+                                <td><code>/api/reset</code></td>
+                                <td>Extra. Puts the tasks back to their starting state. The Reset progress button uses it.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="method-notes">
+                    <div>
+                        <h3><span class="method method-get">GET</span> Retrieve</h3>
+                        <p>Used to get information. <code>GET /api/tasks</code> means: give me the tasks.</p>
+                    </div>
+                    <div>
+                        <h3><span class="method method-put">PUT</span> Update</h3>
+                        <p>Used to change existing information. <code>PUT /api/tasks/3</code> means: update Task 3.</p>
+                    </div>
+                </div>
+
+                <h3 class="explorer-title">Example response</h3>
+                <pre class="code-block" aria-label="Example JSON response"><code>GET /api/tasks/3
+
+{
+  "id": 3,
+  "title": "Build the Internship Tasks Experience",
+  "description": "Present the 8 internship tasks and the 30-day journey...",
+  "status": "completed",
+  "day": 8
+}</code></pre>
+
+                <h3 class="explorer-title">Run the backend on your computer</h3>
+                <ol class="run-steps">
+                    <li>Install Node.js, then open a terminal in the <code>backend</code> folder.</li>
+                    <li>Run <code>npm install</code> once to install Express.</li>
+                    <li>Run <code>npm start</code>. The server starts at <code>http://localhost:3000</code>.</li>
+                    <li>Open <code>http://localhost:3000/dashboard.html</code>. Backend Status shows Connected.</li>
+                </ol>
+            </div>
+        </section>
+
         <!-- CALL TO ACTION -->
         <section class="section section-ink" id="apply">
             <div class="wrap cta">
@@ -192,7 +303,7 @@
                     <li><a href="roadmap.html">Internship Roadmap</a></li>
                     <li><a href="challenge.html">Challenges</a></li>
                     <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
+                                        <li><a href="index.html#contact">Contact</a></li>
                 </ul>
             </nav>
             <ul class="footer-links">
@@ -205,6 +316,7 @@
             <p>@2026 TechBridge by Baselink Services Limited. All rights reserved.</p>
         </div>
     </footer>
+    <script src="demo-api.js"></script>
     <script src="dashboard.js"></script>
 </body>
 </html>
