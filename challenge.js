@@ -3,7 +3,7 @@
    Plain JavaScript. No frameworks, no libraries.
    ----------------------------------------------------------
    What this file does:
-   1. Stores the challenges as an array of objects
+   1. Loads the challenges from the backend API (GET /api/challenges)
    2. Filters them by track, difficulty and search words
    3. Sorts them (default order, easiest first, hardest first)
    4. Draws the cards and the "no results" message
@@ -14,152 +14,9 @@
 /* ---------- 1. THE DATA ---------- */
 
 // Each challenge is an object. "level" is 1, 2 or 3 and is used for sorting.
-const challenges = [
-    {
-        id: "sales-analysis",
-        name: "Small Shop Sales Analysis",
-        track: "Data Analytics",
-        difficulty: "Beginner",
-        level: 1,
-        description: "Analyze three months of sales from a small shop and find out what sells best.",
-        outcome: "A short summary sheet showing total sales, the best-selling products and the best sales day.",
-        objective: "Use a small sales dataset to answer simple business questions: what sold the most, when, and for how much.",
-        skills: ["Data cleaning", "Formulas", "Pivot Tables"],
-        tools: ["Google Sheets", "Microsoft Excel"],
-        produce: [
-            "A cleaned sales spreadsheet",
-            "A Pivot Table of sales by product",
-            "A summary of three findings, in plain language"
-        ],
-        time: "3 to 4 hours"
-    },
-    {
-        id: "expense-analysis",
-        name: "Personal Expense Analysis",
-        track: "Data Analytics",
-        difficulty: "Beginner",
-        level: 1,
-        description: "Organize a month of expenses into categories and see where the money goes.",
-        outcome: "A clear table and a chart showing spending by category, with a note on the biggest cost.",
-        objective: "Turn a messy list of expenses into categories, totals and one chart that anyone can read.",
-        skills: ["Data cleaning", "SUM and SUMIF formulas", "Basic charts"],
-        tools: ["Google Sheets", "Microsoft Excel"],
-        produce: [
-            "A tidy expense table with categories",
-            "A pie or bar chart of spending by category",
-            "One paragraph on what you would cut first"
-        ],
-        time: "2 to 3 hours"
-    },
-    {
-        id: "churn-analysis",
-        name: "Customer Churn Analysis",
-        track: "Data Analytics",
-        difficulty: "Intermediate",
-        level: 2,
-        description: "Study customer records to find out who stopped buying and what they had in common.",
-        outcome: "A short report that names the customer groups most likely to leave and suggests one way to keep them.",
-        objective: "Combine two related tables, measure how many customers left, and look for patterns behind it.",
-        skills: ["SQL JOIN and GROUP BY", "Lookup functions", "Percentages and rates"],
-        tools: ["SQL (SQLite or MySQL)", "Google Sheets"],
-        produce: [
-            "A SQL query that counts customers who left",
-            "A table comparing groups of customers",
-            "A one-page recommendation"
-        ],
-        time: "4 to 5 hours"
-    },
-    {
-        id: "business-dashboard",
-        name: "Business Performance Dashboard",
-        track: "Data Analytics",
-        difficulty: "Advanced",
-        level: 3,
-        description: "Build a dashboard that shows how a small business performed across the year.",
-        outcome: "A one-page dashboard with key numbers, trend charts and three recommendations for the owner.",
-        objective: "Bring cleaning, SQL, charts and written insight together in one dashboard a business owner could use.",
-        skills: ["Data cleaning", "SQL", "Dashboard design", "Business recommendations"],
-        tools: ["SQL", "Google Sheets or Excel", "Looker Studio (optional)"],
-        produce: [
-            "A cleaned dataset built from at least two tables",
-            "A dashboard with four or more charts",
-            "A written summary with three recommendations"
-        ],
-        time: "6 to 8 hours"
-    },
-    {
-        id: "landing-page",
-        name: "Responsive Landing Page",
-        track: "Web Development",
-        difficulty: "Beginner",
-        level: 1,
-        description: "Build a one-page website for a small business that looks good on any screen.",
-        outcome: "A published landing page with a header, a few sections, a call-to-action button and a footer.",
-        objective: "Practice the basics of HTML structure and CSS layout by making one clean, mobile-friendly page.",
-        skills: ["Semantic HTML", "CSS layout", "Media queries"],
-        tools: ["HTML", "CSS", "A code editor", "GitHub Pages"],
-        produce: [
-            "An index.html and style.css",
-            "A layout that works on phone and desktop",
-            "A live link to your page"
-        ],
-        time: "3 to 4 hours"
-    },
-    {
-        id: "portfolio-website",
-        name: "Personal Portfolio Website",
-        track: "Web Development",
-        difficulty: "Beginner",
-        level: 1,
-        description: "Create a small website that introduces you and shows the projects you have built.",
-        outcome: "A multi-section portfolio with an about section, a projects list and contact links.",
-        objective: "Present yourself and your work in a simple, professional website you can share with others.",
-        skills: ["HTML", "CSS", "Links and images", "Basic design choices"],
-        tools: ["HTML", "CSS", "A code editor", "GitHub Pages"],
-        produce: [
-            "A portfolio page with at least three sections",
-            "Links to two or more of your projects",
-            "A live link to your portfolio"
-        ],
-        time: "4 to 5 hours"
-    },
-    {
-        id: "contact-form",
-        name: "Contact Form with Validation",
-        track: "Web Development",
-        difficulty: "Intermediate",
-        level: 2,
-        description: "Build a contact form that checks what people type before it accepts it.",
-        outcome: "A working form that shows clear messages for mistakes and a thank-you message when it is filled in correctly.",
-        objective: "Use JavaScript to respond to what a visitor types, and guide them to fix problems.",
-        skills: ["HTML forms", "JavaScript events", "Conditional logic", "DOM manipulation"],
-        tools: ["HTML", "CSS", "JavaScript"],
-        produce: [
-            "A form with name, email and message fields",
-            "Error messages for empty or invalid fields",
-            "A success message that appears without a page refresh"
-        ],
-        time: "4 to 5 hours"
-    },
-    {
-        id: "interactive-quiz",
-        name: "Interactive Quiz Website",
-        track: "Web Development",
-        difficulty: "Advanced",
-        level: 3,
-        description: "Build a quiz that asks questions, scores the answers and shows the result.",
-        outcome: "A complete quiz with at least eight questions, a score and a restart button.",
-        objective: "Combine arrays, objects, functions and event listeners to build a small but complete web application.",
-        skills: ["JavaScript arrays and objects", "Functions", "Event listeners", "Responsive design"],
-        tools: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
-        produce: [
-            "A quiz that stores its questions in an array of objects",
-            "A score shown at the end, with a restart button",
-            "A live link to your quiz"
-        ],
-        time: "6 to 8 hours"
-    }
-];
+// The challenges come from the backend (GET /api/challenges). They are filled in by loadChallenges().
+let challenges = [];
+
 
 /* ---------- 2. VARIABLES: what the visitor has chosen ---------- */
 
@@ -183,6 +40,15 @@ const dialog        = document.getElementById("challenge-dialog");
 const dialogContent = document.getElementById("dialog-content");
 
 let lastOpenerButton = null;   // remembers which button opened the dialog
+let loadState = "loading";     // "loading", "ready" or "error"
+let lastError = null;          // the last error from the API
+
+const loadingBox    = document.getElementById("challenge-loading");
+const errorBox      = document.getElementById("challenge-error");
+const errorHint     = document.getElementById("challenge-error-hint");
+const retryButton   = document.getElementById("retry-challenges");
+const demoButton    = document.getElementById("use-demo-challenges");
+const demoNote      = document.getElementById("demo-note");
 
 /* ---------- 3. FUNCTIONS ---------- */
 
@@ -288,6 +154,22 @@ function createCard(challenge, position) {
 
 // Draw the cards, the count and the "no results" message.
 function renderChallenges() {
+    // Until the challenges have loaded, show only the loading or error message.
+    loadingBox.hidden = loadState !== "loading";
+    errorBox.hidden = loadState !== "error";
+    demoNote.hidden = !window.TechBridgeApi.isDemo();
+    if (loadState === "error") {
+        errorHint.textContent = lastError ? window.TechBridgeApi.describeError(lastError) : "";
+        demoButton.hidden = window.TechBridgeApi.isDemo();
+    }
+    if (loadState !== "ready") {
+        grid.replaceChildren();
+        grid.hidden = true;
+        noResults.hidden = true;
+        countText.textContent = "";
+        return;
+    }
+
     const visible = getVisibleChallenges();
 
     grid.replaceChildren();
@@ -480,6 +362,34 @@ dialog.addEventListener("close", function () {
     }
 });
 
+/* ---------- LOADING FROM THE API (GET /api/challenges) ---------- */
+
+async function loadChallenges() {
+    loadState = "loading";
+    refresh();
+    try {
+        challenges = await window.TechBridgeApi.request("/api/challenges");
+        loadState = "ready";
+        lastError = null;
+    } catch (error) {
+        lastError = error;
+        loadState = "error";
+    }
+    refresh();
+
+    // A link from the Search page can ask for one challenge to be opened: challenge.html?open=sales-analysis
+    const wanted = new URLSearchParams(window.location.search).get("open");
+    if (loadState === "ready" && wanted) {
+        openChallenge(wanted, null);
+    }
+}
+
+retryButton.addEventListener("click", loadChallenges);
+demoButton.addEventListener("click", function () {
+    window.TechBridgeApi.setDemo(true);
+    loadChallenges();
+});
+
 /* ---------- START ---------- */
 
-refresh();
+loadChallenges();

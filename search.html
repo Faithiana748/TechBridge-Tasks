@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search | TechBridge</title>
+    <meta name="description" content="Search the TechBridge platform: find internship tasks and challenges by keyword.">
+    <link rel="icon" href="techbridge-logo.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="index.html" aria-label="TechBridge home">
+                <img src="techbridge-logo.svg" alt="TechBridge logo" width="220" height="45">
+            </a>
+            <span id="menu-open" class="menu-anchor"></span>
+            <a class="nav-toggle nav-open" href="#menu-open" aria-label="Open menu"><span class="bars"></span></a>
+            <a class="nav-toggle nav-close" href="#menu-closed" aria-label="Close menu"><span class="bars"></span></a>
+            <nav class="site-nav" aria-label="Main">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="tasks.html">Tasks</a></li>
+                    <li><a href="roadmap.html">Roadmap</a></li>
+                    <li><a href="challenge.html">Challenges</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="search.html" aria-current="page">Search</a></li>
+                    <li><a href="index.html#apply">How to apply</a></li>
+                    <li><a href="index.html#community">Community</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a class="btn btn-small" href="https://forms.gle/8EbdSy5ttGfLZfjv5" target="_blank" rel="noopener">Apply now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <!-- INTRODUCTION -->
+        <section class="hero page-hero" id="top">
+            <div class="wrap">
+                <p class="hero-org">TechBridge Search</p>
+                <h1>Search tasks and challenges</h1>
+                <p class="hero-lead">Type a word such as JavaScript, SQL or dashboard. The platform asks the backend and shows every matching task and challenge.</p>
+            </div>
+        </section>
+
+        <!-- SEARCH + RESULTS -->
+        <section class="section section-tint" id="results-section">
+            <div class="wrap">
+                <form class="search-form" id="search-form" role="search" aria-label="Search the platform">
+                    <label for="q">Search</label>
+                    <div class="search-row">
+                        <input id="q" name="q" type="search" placeholder="For example: JavaScript" autocomplete="off">
+                        <button type="submit" class="btn">Search</button>
+                    </div>
+                </form>
+
+                <div class="suggestions" id="suggestions">
+                    <span class="filter-label">Try:</span>
+                    <div class="chips" role="group" aria-label="Suggested searches">
+                        <button type="button" class="chip" data-suggest="JavaScript" aria-pressed="false">JavaScript</button>
+                        <button type="button" class="chip" data-suggest="SQL" aria-pressed="false">SQL</button>
+                        <button type="button" class="chip" data-suggest="API" aria-pressed="false">API</button>
+                        <button type="button" class="chip" data-suggest="dashboard" aria-pressed="false">dashboard</button>
+                        <button type="button" class="chip" data-suggest="beginner" aria-pressed="false">beginner</button>
+                    </div>
+                </div>
+
+                <div class="chips search-filter" id="search-filter" role="group" aria-label="Show results for" hidden>
+                    <button type="button" class="chip" data-show="all" aria-pressed="true">All <span class="count" id="count-all">0</span></button>
+                    <button type="button" class="chip" data-show="tasks" aria-pressed="false">Tasks <span class="count" id="count-tasks">0</span></button>
+                    <button type="button" class="chip" data-show="challenges" aria-pressed="false">Challenges <span class="count" id="count-challenges">0</span></button>
+                </div>
+
+                <p class="demo-note" id="demo-note" hidden>Demo mode: this hosted page has no server, so the API is simulated in your browser. Run the Node.js backend on your computer to use the real API.</p>
+
+                <p class="result-count" id="search-status" role="status" aria-live="polite"></p>
+
+                <div class="state-box" id="search-loading" role="status" hidden>
+                    <span class="spinner" aria-hidden="true"></span>
+                    <p>Searching...</p>
+                </div>
+
+                <div class="state-box is-error" id="search-error" role="alert" hidden>
+                    <h3>Unable to load results.</h3>
+                    <p>Please try again.</p>
+                    <p class="state-hint" id="search-error-hint"></p>
+                    <div class="actions">
+                        <button type="button" class="btn btn-blue" id="retry-search">Try again</button>
+                        <button type="button" class="btn btn-ghost-dark" id="use-demo-search">Use demo mode</button>
+                    </div>
+                </div>
+
+                <div class="no-results" id="search-empty" hidden>
+                    <h3>No matching results found.</h3>
+                    <p>Try a different word, check the spelling, or search for something broader like "web" or "data".</p>
+                </div>
+
+                <section class="result-group" id="group-tasks" hidden>
+                    <h2>Tasks <span class="group-count" id="group-tasks-count"></span></h2>
+                    <ul class="result-grid" id="list-tasks"></ul>
+                </section>
+
+                <section class="result-group" id="group-challenges" hidden>
+                    <h2>Challenges <span class="group-count" id="group-challenges-count"></span></h2>
+                    <ul class="result-grid" id="list-challenges"></ul>
+                </section>
+
+                <noscript>
+                    <p class="noscript-note">Search needs JavaScript. Please turn it on, or browse the <a href="tasks.html">Internship Tasks</a> and <a href="challenge.html">Challenge Hub</a> pages.</p>
+                </noscript>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <div class="footer-brand">
+                <a class="brand" href="index.html" aria-label="TechBridge home">
+                    <img src="techbridge-logo.svg" alt="TechBridge logo" width="220" height="45">
+                </a>
+                <p>Bridging Learning to Real-World Experience</p>
+                <p class="small">TechBridge by Baselink Services Limited</p>
+            </div>
+            <nav aria-label="Footer">
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="tasks.html">Internship Tasks</a></li>
+                    <li><a href="roadmap.html">Internship Roadmap</a></li>
+                    <li><a href="challenge.html">Challenges</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <ul class="footer-links">
+                <li><a href="https://www.linkedin.com/company/techbridge-services/" target="_blank" rel="noopener">LinkedIn</a></li>
+                <li><a href="https://www.facebook.com/p/Baselink-Services-100066771475783/" target="_blank" rel="noopener">Facebook</a></li>
+                <li><a href="mailto:techbridgebaslink@gmail.com">techbridgebaslink@gmail.com</a></li>
+            </ul>
+        </div>
+        <div class="wrap copyright">
+            <p>@2026 TechBridge by Baselink Services Limited. All rights reserved.</p>
+        </div>
+    </footer>
+        <script src="demo-api.js"></script>
+    <script src="api.js"></script>
+    <script src="search.js"></script>
+</body>
+</html>

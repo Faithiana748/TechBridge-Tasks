@@ -1019,3 +1019,60 @@ code { overflow-wrap: anywhere;}
     .bar-fill, .toast { transition: none;}
     .track-btn { transition: none;}
 }
+
+/* ==========================================================
+   TASK 8: PLATFORM HOMEPAGE, SEARCH, API NOTES
+   ========================================================== */
+
+/* Homepage hero: the list of what the platform helps interns do */
+.hero-points { list-style: none; margin: 0 0 2rem; padding: 0; display: flex; flex-wrap: wrap; gap: .6rem .75rem;}
+.hero-points li { padding: .35rem .9rem .35rem 2rem; position: relative; font-weight: 600; background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px;}
+.hero-points li::before { content: ""; position: absolute; left: .8rem; top: 50%; width: .55rem; height: .3rem; border-left: 3px solid var(--signal); border-bottom: 3px solid var(--signal); transform: translateY(-70%) rotate(-45deg);}
+
+/* "Everything in one platform" cards */
+.platform-grid { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem;}
+.platform-grid li { display: flex; flex-direction: column; gap: .5rem; padding: 1.4rem; background: #fff; border: 2px solid var(--ink); border-top-width: 10px; border-top-color: var(--blue); border-radius: 4px;}
+.platform-grid li:nth-child(2) { border-top-color: var(--signal);}
+.platform-grid li:nth-child(3) { border-top-color: var(--ink);}
+.platform-grid p { margin: 0; color: var(--ink-soft); font-size: 1rem;}
+
+/* Notice that the API is simulated in the browser (shown on hosted pages) */
+.demo-note { margin: 1rem 0 0; padding: .7rem 1rem; background: #dcd9fa; border: 2px solid var(--ink); border-radius: 4px; font-weight: 600; font-size: 1rem;}
+.demo-note[hidden] { display: none;}
+
+/* Search page */
+.search-form label { display: block; margin-bottom: .4rem; font-family: var(--font-head); font-weight: 700; font-size: .95rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft);}
+.search-row { display: flex; gap: .75rem;}
+.search-row input { flex: 1 1 auto; min-width: 0; min-height: 52px; padding: .6rem 1rem; font: inherit; font-size: 1.15rem; color: var(--ink); background: #fff; border: 2px solid var(--ink); border-radius: 4px;}
+.search-row .btn { min-height: 52px; cursor: pointer;}
+.suggestions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin-top: 1.25rem;}
+.suggestions .filter-label { margin: 0;}
+.suggestions[hidden], .search-filter[hidden] { display: none;}
+.search-filter { margin-top: 1.5rem;}
+.search-filter .count { margin-left: .35rem; opacity: .75;}
+#search-status { margin-top: 1.5rem;}
+#search-status:empty { margin-top: 0;}
+#search-loading[hidden], #search-error[hidden] { display: none;}
+
+.result-group { margin-top: 2.25rem;}
+.result-group[hidden] { display: none;}
+.result-group h2 { font-size: 1.6rem;}
+.group-count { font-weight: 600; color: var(--ink-soft);}
+.result-grid { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem;}
+.result-card { display: flex; flex-direction: column; align-items: flex-start; gap: .7rem; height: 100%; padding: 1.3rem 1.5rem; background: #fff; border: 2px solid var(--ink); border-top-width: 10px; border-radius: 4px;}
+.result-card h3 { font-size: 1.3rem;}
+.result-card .tile-desc { margin: 0; color: var(--ink-soft);}
+.result-card .btn { margin-top: auto;}
+.result-card .challenge-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem; width: 100%;}
+.result-card .difficulty { font-family: var(--font-head); font-weight: 700; font-size: .95rem;}
+mark { padding: 0 .15em; color: var(--ink); background: #c9f2b3; border-radius: 2px;}
+
+@media (max-width: 1080px) {
+    .platform-grid { grid-template-columns: repeat(2, minmax(0, 1fr));}
+}
+@media (max-width: 760px) {
+    .platform-grid, .result-grid { grid-template-columns: 1fr;}
+    .search-row { flex-direction: column;}
+    .search-row .btn { width: 100%;}
+    .result-card { padding: 1.1rem;}
+}

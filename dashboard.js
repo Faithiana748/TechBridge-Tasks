@@ -944,4 +944,10 @@ el.challengeCount.textContent = CHALLENGE_COUNT;
 renderTechButtons();
 showTechnology("nextjs");
 setBackendState(demoMode ? "demo" : "checking");
-loadTasks(true);          // ask the API for the tasks as soon as the page opens
+// A link from the Search page (dashboard.html?task=5) opens that task once the tasks have loaded.
+loadTasks(true).then(function () {
+    const wanted = Number(new URLSearchParams(window.location.search).get("task"));
+    if (loadState === "ready" && wanted && findTask(wanted)) {
+        openTask(wanted);
+    }
+});
