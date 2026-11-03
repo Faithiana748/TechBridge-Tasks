@@ -6,7 +6,11 @@
   "scripts": {
     "start": "node server.js"
   },
-  "keywords": ["techbridge", "express", "api"],
+  "keywords": [
+    "techbridge",
+    "express",
+    "api"
+  ],
   "license": "ISC",
   "dependencies": {
     "express": "^5.1.0"

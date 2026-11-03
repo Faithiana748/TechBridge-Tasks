@@ -6,8 +6,16 @@
     "status": "completed",
     "day": 1,
     "objective": "Build a responsive homepage that explains what TechBridge is, what it offers and how to apply.",
-    "skills": ["Semantic HTML", "CSS layout", "Responsive design"],
-    "produce": ["index.html and style.css", "A page that works on phone and desktop", "A live GitHub Pages link"],
+    "skills": [
+      "Semantic HTML",
+      "CSS layout",
+      "Responsive design"
+    ],
+    "produce": [
+      "index.html and style.css",
+      "A page that works on phone and desktop",
+      "A live GitHub Pages link"
+    ],
     "time": "3 to 4 hours",
     "page": "index.html"
   },
@@ -18,8 +26,16 @@
     "status": "completed",
     "day": 4,
     "objective": "Explain both programs clearly and help a visitor decide which one fits them.",
-    "skills": ["Page structure", "CSS grid and flexbox", "Tables and cards"],
-    "produce": ["programs.html", "A comparison of the two programs", "Navigation between pages"],
+    "skills": [
+      "Page structure",
+      "CSS grid and flexbox",
+      "Tables and cards"
+    ],
+    "produce": [
+      "programs.html",
+      "A comparison of the two programs",
+      "Navigation between pages"
+    ],
     "time": "3 to 4 hours",
     "page": "programs.html"
   },
@@ -30,8 +46,16 @@
     "status": "completed",
     "day": 8,
     "objective": "Show every task with its day and difficulty so a visitor understands the internship at a glance.",
-    "skills": ["Layout design", "Timelines", "Visual hierarchy"],
-    "produce": ["tasks.html", "A 30-day timeline", "Difficulty labels for every task"],
+    "skills": [
+      "Layout design",
+      "Timelines",
+      "Visual hierarchy"
+    ],
+    "produce": [
+      "tasks.html",
+      "A 30-day timeline",
+      "Difficulty labels for every task"
+    ],
     "time": "4 to 5 hours",
     "page": "tasks.html"
   },
@@ -42,8 +66,16 @@
     "status": "completed",
     "day": 11,
     "objective": "Introduce JavaScript by showing the right 8 tasks when a track is chosen, without refreshing the page.",
-    "skills": ["Arrays and objects", "Event listeners", "DOM manipulation"],
-    "produce": ["roadmap.html and roadmap.js", "A track switcher", "A 30-day progress bar"],
+    "skills": [
+      "Arrays and objects",
+      "Event listeners",
+      "DOM manipulation"
+    ],
+    "produce": [
+      "roadmap.html and roadmap.js",
+      "A track switcher",
+      "A 30-day progress bar"
+    ],
     "time": "4 to 5 hours",
     "page": "roadmap.html"
   },
@@ -54,8 +86,16 @@
     "status": "completed",
     "day": 15,
     "objective": "Let visitors browse challenges by track and difficulty and open any challenge for more detail.",
-    "skills": ["Filtering", "Dynamic HTML", "Modal windows"],
-    "produce": ["challenge.html and challenge.js", "Track and difficulty filters", "A details window for every challenge"],
+    "skills": [
+      "Filtering",
+      "Dynamic HTML",
+      "Modal windows"
+    ],
+    "produce": [
+      "challenge.html and challenge.js",
+      "Track and difficulty filters",
+      "A details window for every challenge"
+    ],
     "time": "4 to 5 hours",
     "page": "challenge.html"
   },
@@ -66,8 +106,16 @@
     "status": "completed",
     "day": 19,
     "objective": "Turn the website into a working platform where an intern can see progress and update it.",
-    "skills": ["Progress calculations", "Conditional logic", "Interactive UI"],
-    "produce": ["dashboard.html and dashboard.js", "A task tracker that updates progress", "A Technology Explorer"],
+    "skills": [
+      "Progress calculations",
+      "Conditional logic",
+      "Interactive UI"
+    ],
+    "produce": [
+      "dashboard.html and dashboard.js",
+      "A task tracker that updates progress",
+      "A Technology Explorer"
+    ],
     "time": "4 to 6 hours",
     "page": "dashboard.html"
   },
@@ -75,24 +123,40 @@
     "id": 7,
     "title": "Build a TechBridge Task Management API",
     "description": "Create a Node.js and Express backend and connect the dashboard to it with fetch().",
-    "status": "in-progress",
+    "status": "completed",
     "day": 22,
     "objective": "Move the task data out of the webpage and into a backend API that the dashboard requests, displays and updates.",
-    "skills": ["Node.js and Express.js", "REST API endpoints", "fetch(), loading states and error handling"],
-    "produce": ["backend/server.js and data/tasks.json", "GET and PUT endpoints for tasks", "A dashboard that loads and updates tasks through the API"],
+    "skills": [
+      "Node.js and Express.js",
+      "REST API endpoints",
+      "fetch(), loading states and error handling"
+    ],
+    "produce": [
+      "backend/server.js and data/tasks.json",
+      "GET and PUT endpoints for tasks",
+      "A dashboard that loads and updates tasks through the API"
+    ],
     "time": "4 to 6 hours",
     "page": "dashboard.html"
   },
   {
     "id": 8,
-    "title": "Build the Complete TechBridge Internship Platform",
-    "description": "Combine every component from the internship into one complete TechBridge platform.",
-    "status": "not-started",
+    "title": "Build the TechBridge Intern Management Platform",
+    "description": "Combine the dashboard, the Challenge Hub, search and the Express API into one complete TechBridge platform.",
+    "status": "in-progress",
     "day": 26,
-    "objective": "Bring all pages and the backend together into one consistent, tested platform ready to show to others.",
-    "skills": ["Project organization", "Testing", "Polish and review"],
-    "produce": ["A complete multi-page platform", "Consistent design and navigation", "A final live website"],
+    "objective": "Bring every part of the internship into one consistent, tested platform: pages, API, search, task management and documentation.",
+    "skills": [
+      "Project organization",
+      "Testing",
+      "Documentation and deployment"
+    ],
+    "produce": [
+      "A complete multi-page platform",
+      "Frontend connected to the backend API",
+      "A README, a GitHub repository and a live website"
+    ],
     "time": "6 to 8 hours",
-    "page": ""
+    "page": "index.html"
   }
 ]

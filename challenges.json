@@ -1,0 +1,214 @@
+[
+  {
+    "id": "sales-analysis",
+    "name": "Small Shop Sales Analysis",
+    "track": "Data Analytics",
+    "difficulty": "Beginner",
+    "level": 1,
+    "description": "Analyze three months of sales from a small shop and find out what sells best.",
+    "outcome": "A short summary sheet showing total sales, the best-selling products and the best sales day.",
+    "objective": "Use a small sales dataset to answer simple business questions: what sold the most, when, and for how much.",
+    "skills": [
+      "Data cleaning",
+      "Formulas",
+      "Pivot Tables"
+    ],
+    "tools": [
+      "Google Sheets",
+      "Microsoft Excel"
+    ],
+    "produce": [
+      "A cleaned sales spreadsheet",
+      "A Pivot Table of sales by product",
+      "A summary of three findings, in plain language"
+    ],
+    "time": "3 to 4 hours"
+  },
+  {
+    "id": "expense-analysis",
+    "name": "Personal Expense Analysis",
+    "track": "Data Analytics",
+    "difficulty": "Beginner",
+    "level": 1,
+    "description": "Organize a month of expenses into categories and see where the money goes.",
+    "outcome": "A clear table and a chart showing spending by category, with a note on the biggest cost.",
+    "objective": "Turn a messy list of expenses into categories, totals and one chart that anyone can read.",
+    "skills": [
+      "Data cleaning",
+      "SUM and SUMIF formulas",
+      "Basic charts"
+    ],
+    "tools": [
+      "Google Sheets",
+      "Microsoft Excel"
+    ],
+    "produce": [
+      "A tidy expense table with categories",
+      "A pie or bar chart of spending by category",
+      "One paragraph on what you would cut first"
+    ],
+    "time": "2 to 3 hours"
+  },
+  {
+    "id": "churn-analysis",
+    "name": "Customer Churn Analysis",
+    "track": "Data Analytics",
+    "difficulty": "Intermediate",
+    "level": 2,
+    "description": "Study customer records to find out who stopped buying and what they had in common.",
+    "outcome": "A short report that names the customer groups most likely to leave and suggests one way to keep them.",
+    "objective": "Combine two related tables, measure how many customers left, and look for patterns behind it.",
+    "skills": [
+      "SQL JOIN and GROUP BY",
+      "Lookup functions",
+      "Percentages and rates"
+    ],
+    "tools": [
+      "SQL (SQLite or MySQL)",
+      "Google Sheets"
+    ],
+    "produce": [
+      "A SQL query that counts customers who left",
+      "A table comparing groups of customers",
+      "A one-page recommendation"
+    ],
+    "time": "4 to 5 hours"
+  },
+  {
+    "id": "business-dashboard",
+    "name": "Business Performance Dashboard",
+    "track": "Data Analytics",
+    "difficulty": "Advanced",
+    "level": 3,
+    "description": "Build a dashboard that shows how a small business performed across the year.",
+    "outcome": "A one-page dashboard with key numbers, trend charts and three recommendations for the owner.",
+    "objective": "Bring cleaning, SQL, charts and written insight together in one dashboard a business owner could use.",
+    "skills": [
+      "Data cleaning",
+      "SQL",
+      "Dashboard design",
+      "Business recommendations"
+    ],
+    "tools": [
+      "SQL",
+      "Google Sheets or Excel",
+      "Looker Studio (optional)"
+    ],
+    "produce": [
+      "A cleaned dataset built from at least two tables",
+      "A dashboard with four or more charts",
+      "A written summary with three recommendations"
+    ],
+    "time": "6 to 8 hours"
+  },
+  {
+    "id": "landing-page",
+    "name": "Responsive Landing Page",
+    "track": "Web Development",
+    "difficulty": "Beginner",
+    "level": 1,
+    "description": "Build a one-page website for a small business that looks good on any screen.",
+    "outcome": "A published landing page with a header, a few sections, a call-to-action button and a footer.",
+    "objective": "Practice the basics of HTML structure and CSS layout by making one clean, mobile-friendly page.",
+    "skills": [
+      "Semantic HTML",
+      "CSS layout",
+      "Media queries"
+    ],
+    "tools": [
+      "HTML",
+      "CSS",
+      "A code editor",
+      "GitHub Pages"
+    ],
+    "produce": [
+      "An index.html and style.css",
+      "A layout that works on phone and desktop",
+      "A live link to your page"
+    ],
+    "time": "3 to 4 hours"
+  },
+  {
+    "id": "portfolio-website",
+    "name": "Personal Portfolio Website",
+    "track": "Web Development",
+    "difficulty": "Beginner",
+    "level": 1,
+    "description": "Create a small website that introduces you and shows the projects you have built.",
+    "outcome": "A multi-section portfolio with an about section, a projects list and contact links.",
+    "objective": "Present yourself and your work in a simple, professional website you can share with others.",
+    "skills": [
+      "HTML",
+      "CSS",
+      "Links and images",
+      "Basic design choices"
+    ],
+    "tools": [
+      "HTML",
+      "CSS",
+      "A code editor",
+      "GitHub Pages"
+    ],
+    "produce": [
+      "A portfolio page with at least three sections",
+      "Links to two or more of your projects",
+      "A live link to your portfolio"
+    ],
+    "time": "4 to 5 hours"
+  },
+  {
+    "id": "contact-form",
+    "name": "Contact Form with Validation",
+    "track": "Web Development",
+    "difficulty": "Intermediate",
+    "level": 2,
+    "description": "Build a contact form that checks what people type before it accepts it.",
+    "outcome": "A working form that shows clear messages for mistakes and a thank-you message when it is filled in correctly.",
+    "objective": "Use JavaScript to respond to what a visitor types, and guide them to fix problems.",
+    "skills": [
+      "HTML forms",
+      "JavaScript events",
+      "Conditional logic",
+      "DOM manipulation"
+    ],
+    "tools": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "produce": [
+      "A form with name, email and message fields",
+      "Error messages for empty or invalid fields",
+      "A success message that appears without a page refresh"
+    ],
+    "time": "4 to 5 hours"
+  },
+  {
+    "id": "interactive-quiz",
+    "name": "Interactive Quiz Website",
+    "track": "Web Development",
+    "difficulty": "Advanced",
+    "level": 3,
+    "description": "Build a quiz that asks questions, scores the answers and shows the result.",
+    "outcome": "A complete quiz with at least eight questions, a score and a restart button.",
+    "objective": "Combine arrays, objects, functions and event listeners to build a small but complete web application.",
+    "skills": [
+      "JavaScript arrays and objects",
+      "Functions",
+      "Event listeners",
+      "Responsive design"
+    ],
+    "tools": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "GitHub Pages"
+    ],
+    "produce": [
+      "A quiz that stores its questions in an array of objects",
+      "A score shown at the end, with a restart button",
+      "A live link to your quiz"
+    ],
+    "time": "6 to 8 hours"
+  }
+]
